@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:gravity="center"
-        android:text="Who is the 44th President of the United States?"
+        android:text="What is the name of the first Nintendo console released in the US?"
         android:textSize="40sp"
         />
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:gravity="center"
-        android:text="Barack Obama"
+        android:text="Nintendo Entertainment System (NES)"
         android:textSize="40sp"
         android:visibility="invisible"
         />
