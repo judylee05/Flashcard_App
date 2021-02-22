@@ -3,14 +3,10 @@
 ## Lab 1
 
 ### App Description
-`TODO://` Flashcard application created in Android Studio. The app shows a question and clicking on the question causes the answer to be shown.
+Flashcard application created in Android Studio. The app shows a question and clicking on the question causes the answer to be shown.
 
 ### App Walk-though
-`TODO://`
-
 <img src="https://github.com/judylee05/Flashcard_App/blob/master/flashcard_app.gif" width=200><br>
-
-`TODO://` 
 
 ## Required
 - [x] Create New Project in Android Studio
