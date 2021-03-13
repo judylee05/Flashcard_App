@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddCardActivity">
+
+    <TextView
+        android:id="@+id/new_flashcard_question"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:textSize="40sp"
+        />
+
+    <!--    create x (cancel) button to return to previous screen -->
+    <ImageView
+        android:id="@+id/cancel_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/cancel_vector"
+        />
+
+    <!--    create save button to save user's inputted question and answer -->
+    <ImageView
+        android:id="@+id/save_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/save_vector"
+        />
+
+<!--    space for user to input their question-->
+    <EditText
+        android:id="@+id/add_question"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="20dp"
+        android:inputType="textMultiLine"
+        android:hint="Enter Your Question"
+        />
+
+    <EditText
+        android:id="@+id/add_answer"
+        android:layout_below="@+id/add_question"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="20dp"
+        android:inputType="textMultiLine"
+        android:hint="Enter The Answer"
+        />
+
+</RelativeLayout>

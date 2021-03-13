@@ -25,5 +25,14 @@
         android:visibility="invisible"
         />
 
+<!--    create + (add) button to add new card-->
+    <ImageView
+        android:id="@+id/addCardButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/confirm_vector" />
+
 
 </RelativeLayout>
