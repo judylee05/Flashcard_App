@@ -63,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                 questionTextView.setVisibility(View.INVISIBLE);
                 answerTextView.setVisibility(View.VISIBLE);
-
-                anim.setDuration(1500);
+                anim.setDuration(800);
                 anim.start();
             }
         });
@@ -112,14 +111,6 @@ public class MainActivity extends AppCompatActivity {
                 allFlashcards = flashcardDatabase.getAllCards();
                 Flashcard current_flashcard = allFlashcards.get(current_card_index);
 
-                questionTextView.setText(current_flashcard.getQuestion());
-                answerTextView.setText(current_flashcard.getAnswer());
-
-                // ensure that user sees the question side of the next card
-                questionTextView.setVisibility(View.VISIBLE);
-                answerTextView.setVisibility(View.INVISIBLE);
-                System.out.println(50);
-
                 // setup animations for when next card is shown
                 final Animation leftOutAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.left_out);
                 final Animation rightInAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.right_in);
@@ -127,17 +118,24 @@ public class MainActivity extends AppCompatActivity {
                 leftOutAnim.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-                        leftOutAnim.setDuration(1500);
+                        leftOutAnim.setDuration(1000);
                         leftOutAnim.start();
-                        System.out.println(101);
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        // this method is called when the animation is finished playing
-                        rightInAnim.setDuration(1500);
+                        // this method is called when the animation is finished playing - chains leftOutAnim first then rightInAnim once leftOutAnim is finished
+
+                        // update the current flashcard to the next db information
+                        questionTextView.setText(current_flashcard.getQuestion());
+                        answerTextView.setText(current_flashcard.getAnswer());
+
+                        // ensure that user sees the question side of the next card
+                        questionTextView.setVisibility(View.VISIBLE);
+                        answerTextView.setVisibility(View.INVISIBLE);
+
+                        rightInAnim.setDuration(1000);
                         findViewById(R.id.flashcard_question).startAnimation(rightInAnim);
-                        System.out.println(201);
                     }
 
                     @Override
@@ -147,7 +145,12 @@ public class MainActivity extends AppCompatActivity {
                 });
                 // once user successfully clicks on "next" button, play animation chain
                     // starts with leftOutAnimation and then once that ends, starts rightInAnimation
-                findViewById(R.id.flashcard_question).startAnimation(leftOutAnim);
+                if (answerTextView.getVisibility() == View.VISIBLE){
+                    findViewById(R.id.flashcard_answer).startAnimation(leftOutAnim);
+                }
+                else{
+                    findViewById(R.id.flashcard_question).startAnimation(leftOutAnim);
+                }
 
             }
         });
