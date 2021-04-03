@@ -18,7 +18,7 @@ Flashcard mobile application created in Android Studio. The user can add new fla
 - [ ] User sees a 'card flip' animation when the card is tapped
 - [ ] User sees a celebration animation with confetti when they answer a question correctly
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------## Lab 3
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------## Lab 3
 
 ### App Description
 Flashcard mobile application created in Android Studio. The mobile app allows the user to create flashcards, which shows a question and then the answer once the question-side is clicked. The user can look through previously created cards by accessing the database information.
