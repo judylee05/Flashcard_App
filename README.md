@@ -1,5 +1,24 @@
 ## Flashcard App
-## Lab 3
+## Lab 4
+
+### App Description
+Flashcard mobile application created in Android Studio. The user can add new flashcards by pressing on the + button and look through the current flashcards in the deck by clicking on the > button. In addition, the user can click on the current card to switch back and forth from the question side to the answer side as well.
+
+### App Walk-though
+<img src="https://github.com/judylee05/Flashcard_App/blob/master/codepath_lab4_gif.gif" width=200><br>
+
+## Required
+- [x] User sees a transition animation when going from the main screen to the add card screen.
+- [x] User sees a reveal animation when the flashcard is tapped and the answer is shown
+- [x] User sees flashcards animating in / out when the 'next' button is tapped
+
+## Optional
+- [ ] Extra styling is added!
+- [ ] User sees a countdown timer for each question
+- [ ] User sees a 'card flip' animation when the card is tapped
+- [ ] User sees a celebration animation with confetti when they answer a question correctly
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------## Lab 3
 
 ### App Description
 Flashcard mobile application created in Android Studio. The mobile app allows the user to create flashcards, which shows a question and then the answer once the question-side is clicked. The user can look through previously created cards by accessing the database information.
