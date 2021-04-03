@@ -2,9 +2,13 @@ package com.example.flashcardapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -22,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     // initialize flashcard index
         // will increase by +1 when next button is pressed
         // will be reset once user reaches end of card
-    int current_card_index = 0;
+    // change to index = 0 if not implementing feature where last card added is seen at app launch
+    int current_card_index = -1;
 
 
     @Override
@@ -46,8 +51,21 @@ public class MainActivity extends AppCompatActivity {
             // when user clicks on the question, will show the answer
             @Override
             public void onClick(View view) {
+                // get the center for the clipping circle
+                int cx = answerTextView.getWidth() / 2;
+                int cy = answerTextView.getHeight() / 2;
+
+                // get the final radius for the clipping circle
+                float finalRadius = (float) Math.hypot(cx, cy);
+
+                // create the animator for this view (the start radius is zero)
+                Animator anim = ViewAnimationUtils.createCircularReveal(answerTextView, cx, cy, 0f, finalRadius);
+
                 questionTextView.setVisibility(View.INVISIBLE);
                 answerTextView.setVisibility(View.VISIBLE);
+
+                anim.setDuration(1500);
+                anim.start();
             }
         });
 
@@ -66,15 +84,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
                 MainActivity.this.startActivityForResult(intent, 100);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
             }
         });
 
         findViewById(R.id.nextCardButton).setOnClickListener(new View.OnClickListener() {
             // when user clicks on the "next" button, will show the next card (i.e. card that was added before the current one on main page)
+            // will show the question part always first - if user clicks "next" button while on the answer portion of the current card,
+            // the next button will show next question portion of the card
             @Override
             public void onClick(View view) {
                 // don't allow user to go to next card if there's no cards in the database
-                if (allFlashcards.size() == 0){
+                if (allFlashcards.size() == 0) {
                     return;
                 }
 
@@ -93,6 +114,41 @@ public class MainActivity extends AppCompatActivity {
 
                 questionTextView.setText(current_flashcard.getQuestion());
                 answerTextView.setText(current_flashcard.getAnswer());
+
+                // ensure that user sees the question side of the next card
+                questionTextView.setVisibility(View.VISIBLE);
+                answerTextView.setVisibility(View.INVISIBLE);
+                System.out.println(50);
+
+                // setup animations for when next card is shown
+                final Animation leftOutAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.left_out);
+                final Animation rightInAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.right_in);
+
+                leftOutAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        leftOutAnim.setDuration(1500);
+                        leftOutAnim.start();
+                        System.out.println(101);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        // this method is called when the animation is finished playing
+                        rightInAnim.setDuration(1500);
+                        findViewById(R.id.flashcard_question).startAnimation(rightInAnim);
+                        System.out.println(201);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        // we don't need to worry about this method
+                    }
+                });
+                // once user successfully clicks on "next" button, play animation chain
+                    // starts with leftOutAnimation and then once that ends, starts rightInAnimation
+                findViewById(R.id.flashcard_question).startAnimation(leftOutAnim);
+
             }
         });
     }

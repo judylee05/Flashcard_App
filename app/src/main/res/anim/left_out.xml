@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator">
+    <!--    animation for screen to go out to the left-->
+    <!--    - used for transition when user goes from main screen to add-card screen-->
+    <translate
+        android:fromXDelta="0"
+        android:toXDelta="-100%p"
+        android:duration="500"/>
+</set>
